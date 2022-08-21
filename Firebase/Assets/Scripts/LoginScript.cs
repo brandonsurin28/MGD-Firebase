@@ -63,7 +63,7 @@ public class LoginScript : MonoBehaviour
         LoginBtn.onClick.AddListener(LoginWithEmail);
         googleLoginBtn.onClick.AddListener(SignInWithGoogle);
 
-        writeDataBtn.onClick.AddListener(WriteRawJsonData);
+       // writeDataBtn.onClick.AddListener(WriteRawJsonData);
 
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => 
         {
@@ -73,7 +73,7 @@ public class LoginScript : MonoBehaviour
                 // Create and hold a reference to your FirebaseApp,
                 // where app is a Firebase.FirebaseApp property of your application class.
                 app = FirebaseApp.DefaultInstance;
-                auth = FirebaseAuth.DefaultInstance;
+                auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
 
                 databaseRoot = FirebaseDatabase.DefaultInstance.RootReference;
                 userDatabase = databaseRoot.Child("users");

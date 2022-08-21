@@ -52,4 +52,30 @@ public class ReadScript : MonoBehaviour
             }
         });
     }
+    public void ShowUpdateScore()
+    {
+        databaseRoot.Child("users").Child($"{auth.CurrentUser.UserId}/score").GetValueAsync().ContinueWithOnMainThread(task => {
+            if (task.IsFaulted)
+            {
+                // Handle the error...
+                Debug.LogError(" reading error: " + task.Exception);
+            }
+            else if (task.IsCompleted)
+            {
+                DataSnapshot snapshot = task.Result;
+                // Do something with snapshot...
+
+                if (snapshot != null && snapshot.Exists)
+                {
+                    Debug.Log(snapshot.Value.ToString());
+                    playerScoreLabel.text = snapshot.Value.ToString();
+                }
+                else
+                {
+                    Debug.LogError("No such data at this location!");
+                }
+            }
+        });
+    }
+
 }

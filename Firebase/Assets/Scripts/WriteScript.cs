@@ -44,7 +44,7 @@ public class WriteScript : MonoBehaviour
                 auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
 
                 databaseRoot = FirebaseDatabase.DefaultInstance.RootReference;
-                userDatabase = databaseRoot.Child("users");
+                //userDatabase = databaseRoot.Child("users");
 
                 Debug.Log($"Firebase initialized!");
                 // Set a flag here to indicate whether Firebase is ready to use by your app.
@@ -60,14 +60,13 @@ public class WriteScript : MonoBehaviour
 
     public void WriteData()
     {
-        //saveScore = new PlayerScore(playerName, Score);
-
         //Serialized newScore to Json
         string serialisedNewScore = JsonUtility.ToJson(saveScore);
         Debug.Log(serialisedNewScore);
 
         //databaseRoot.Child("users").Child(auth.CurrentUser.UserId).Child("username").SetValueAsync(name);
-        databaseRoot.Child($"users/){auth.CurrentUser.UserId}").SetValueAsync(name).ContinueWith(task =>
+        // databaseRoot.Child($"users/){auth.CurrentUser.UserId}").SetValueAsync(name)
+        databaseRoot.Child("users").Child(auth.CurrentUser.UserId).SetRawJsonValueAsync(serialisedNewScore).ContinueWith(task =>
         {
             if (task.IsCanceled)
             {
@@ -86,11 +85,11 @@ public class WriteScript : MonoBehaviour
 
     void GetPlayerName(string n)
     {
-        playerName = n;
+        saveScore.playerName = n;
     }
     void GetPlayerScore(string s)
     {
-        playerScore = s;
+        saveScore.score = s;
     }
 
     [Serializable]
@@ -100,7 +99,8 @@ public class WriteScript : MonoBehaviour
         public string playerName;
         public string score;
 
-        public PlayerScore(string playerID, string playerName, string score)
+       // public PlayerScore(string playerID, string playerName, string score)
+        public PlayerScore( string playerName, string score)
         {
             //this.playerID = playerID;
             this.playerName = playerName;
