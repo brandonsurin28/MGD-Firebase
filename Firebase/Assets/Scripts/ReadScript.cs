@@ -19,14 +19,12 @@ public class ReadScript : MonoBehaviour
     DatabaseReference databaseRoot;
     DatabaseReference userDatabase;
 
-    [SerializeField] TextMeshProUGUI playerNameLabel;
     [SerializeField] TextMeshProUGUI playerScoreLabel;
     [SerializeField] Button readDataBtn;
 
     void Awake()
     {
-        /*readDataBtn.onClick.AddListener();
-        readDataBtn.onClick.AddListener();*/
+        readDataBtn.onClick.AddListener(ShowUpdateScore);
 
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
         {
