@@ -1,12 +1,16 @@
-using Firebase;
-using Firebase.Auth;
-using Firebase.Database;
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using Firebase;
+using Firebase.Auth;
+using Firebase.Extensions;
+using TMPro;
+using System.Threading.Tasks;
+using Google;
+using Firebase.Database;
+using System;
 
 public class WriteScript : MonoBehaviour
 {
